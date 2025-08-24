@@ -165,7 +165,7 @@ NTSTATUS MapImage(PBYTE buffer, PCHAR error) {
 }
 
 // The third parameter is a pointer to the original DriverEntry that we inline hooked
-NTSTATUS DriverEntry(PDRIVER_OBJECT driver, PUNICODE_STRING registryPath, DRIVER_INITIALIZE func) {
+NTSTATUS DriverEntry(PDRIVER_OBJECT driver, PUNICODE_STRING registryPath) {
 	UNREFERENCED_PARAMETER(driver);
 	UNREFERENCED_PARAMETER(registryPath);
 

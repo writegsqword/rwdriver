@@ -5,10 +5,10 @@ INT64(*HalDispatchOriginal)(PVOID, PVOID);
 // The bootkit mapper will fill this data
 __declspec(dllexport) volatile BYTE mapperData[MAPPER_DATA_SIZE];
 
-VOID Main(PVOID func) {
+VOID Main() {
 	// Undo hook by bootkit (no error checking because there's no reason it should fail
 	// and if it does fail then you can't recover)
-	MemCopyWP(func, (PVOID)mapperData, sizeof(mapperData));
+	//MemCopyWP(func, (PVOID)mapperData, sizeof(mapperData));
 
 	// Simple .data function pointer hook
 	PVOID kernelBase = GetModuleBaseAddress("ntoskrnl.exe");
@@ -169,7 +169,7 @@ NTSTATUS DriverEntry(PDRIVER_OBJECT driver, PUNICODE_STRING registryPath, DRIVER
 	UNREFERENCED_PARAMETER(driver);
 	UNREFERENCED_PARAMETER(registryPath);
 
-	Main((PVOID)func);
+	Main();
 
-	return func(driver, registryPath);
+	return STATUS_SUCCESS;
 }
